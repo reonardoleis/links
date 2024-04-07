@@ -69,7 +69,7 @@ function App() {
                 className="text-md lg:text-xl md:text-lg font-thin w-full mt-2 rounded-xl"
                 target="_blank"
               >
-                <button className="flex justify-center items-center text-xl w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
+                <button className="flex justify-center items-center w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
                   {link.icon && <link.icon className="inline mr-2" />}
                   {link.name} {link.detailedName && `(${link.detailedName})`}
                 </button>
