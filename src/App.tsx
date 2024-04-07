@@ -38,8 +38,8 @@ function App() {
     {
       icon: FaLastfm,
       name: "Last.fm",
-      detailedName: "rxonvrdo",
-      url: "https://last.fm/user/rxonvrdo",
+      detailedName: "reonardo",
+      url: "https://last.fm/user/reonardo",
     },
     {
       icon: FaGithub,
