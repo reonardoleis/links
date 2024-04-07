@@ -59,7 +59,7 @@ function App() {
             rxonvrdo's links
           </h1>
           <p className="text-md font-thin text-center">
-            Looking for new AMIGOS™ cult members :)
+            against all legal positivism
           </p>
           <div className="flex flex-col mt-2 mb-5 w-full p-4 items-center justify-center">
             {links.map((link) => (
