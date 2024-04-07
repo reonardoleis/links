@@ -67,6 +67,7 @@ function App() {
                 key={link.name}
                 href={link.url}
                 className="text-xl font-thin w-full mt-2 rounded-xl"
+                target="_blank"
               >
                 <button className="flex justify-center items-center text-xl w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
                   {link.icon && <link.icon className="inline mr-2" />}
