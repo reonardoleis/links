@@ -54,7 +54,7 @@ function App() {
       <div className="flex h-screen justify-center items-center text-white bg-zinc-950 p-4">
         <div className="lg:min-w-[750px] flex flex-col items-center justify-center rounded-xl border-solid border border-zinc-800 p-8 backdrop-blur-sm relative">
           <DoomFire />
-          <h1 className="text-6xl font-bold emoji">☢️</h1>
+          <h1 className="text-6xl font-bold emoji">☣️</h1>
           <h1 className="text-4xl font-bold text-center mt-2">
             rxonvrdo's links
           </h1>
