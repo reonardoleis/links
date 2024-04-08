@@ -5,8 +5,11 @@ import {
   FaGithub,
   FaSteam,
   FaLastfm,
+  FaLink,
 } from "react-icons/fa6";
 import DoomFire from "./components/DoomFire";
+import React from "react";
+import Prize from "./components/Prize";
 
 interface Link {
   icon?: IconType;
@@ -16,7 +19,8 @@ interface Link {
 }
 
 function App() {
-  const links: Link[] = [
+  const [expert, setExpert] = React.useState<boolean>(false);
+  const [links, setLinks] = React.useState<Link[]>([
     {
       icon: FaXTwitter,
       name: "X",
@@ -47,27 +51,75 @@ function App() {
       detailedName: "reonardoleis",
       url: "https://github.com/reonardoleis",
     },
-  ];
+    {
+      icon: FaLink,
+      name: "My links",
+      url: "http://localhost:5173?r=1",
+    },
+  ]);
+
+  React.useEffect(() => {
+    if (window.location.search.includes("?expert=true")) {
+      setExpert(true);
+      return;
+    }
+
+    if (window.location.search.includes("?r=")) {
+      const r = parseInt(window.location.search.replace("?r=", ""));
+
+      if (r >= 8) {
+        return window.location.replace("http://localhost:5173");
+      }
+
+      for (let i = 0; i < r; i++) {
+        setLinks((prev) => {
+          const base = window.location.href.split("?")[0];
+
+          if (r == 7) {
+            setExpert(true);
+            var newUrl = `${base}?expert=true`;
+          } else {
+            var newUrl = `${base}?r=${r + 1}`;
+          }
+
+          const myLinks = prev.find((link) => link.name === "My links")!;
+          myLinks.url = newUrl;
+
+          return [
+            ...prev,
+            {
+              icon: FaLink,
+              name: `My links (${i + 1})`,
+              url: newUrl,
+            },
+          ];
+        });
+      }
+    }
+  }, []);
 
   return (
     <>
       <div className="flex h-screen justify-center items-center text-white bg-zinc-950 p-4">
         <div className="lg:min-w-[750px] flex flex-col items-center justify-center rounded-xl border-solid border border-zinc-800 p-8 backdrop-blur-sm relative">
           <DoomFire />
-          <h1 className="text-6xl font-bold emoji">☣️</h1>
+          {expert && <Prize />}
+          <div className="text-6xl emoji select-none  flex items-center justify-center">
+            ☣️
+          </div>
           <h1 className="text-4xl font-bold text-center mt-2">
-            rxonvrdo's links
+            rxonvrdo<span className="select-none">'s links</span>
           </h1>
-          <p className="text-md font-thin text-center">
+          <p className="text-md font-thin text-center select-none">
             against all legal positivism
           </p>
           <div className="flex flex-col mt-2 mb-5 w-full p-4 items-center justify-center">
-            {links.map((link) => (
+            {links.map((link, key) => (
               <a
-                key={link.name}
+                key={key}
                 href={link.url}
-                className="text-md lg:text-xl md:text-lg font-thin w-full mt-2 rounded-xl"
-                target="_blank"
+                className="text-md lg:text-xl md:text-lg font-thin w-full mt-2 rounded-xl select-none"
+                target={!link.name.includes("My links") ? "_blank" : "_self"}
               >
                 <button className="flex justify-center items-center w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
                   {link.icon && <link.icon className="inline mr-2" />}
