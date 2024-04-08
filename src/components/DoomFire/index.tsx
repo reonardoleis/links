@@ -1,6 +1,8 @@
 import React from "react";
 
-function DoomFire() {
+interface DoomFireProps extends React.HTMLAttributes<HTMLCanvasElement> {}
+
+function DoomFire(props: DoomFireProps) {
   // get all max window size
   var CANVAS_WIDTH = 300;
   const CANVAS_WIDTH_FIXED = CANVAS_WIDTH;
@@ -155,12 +157,12 @@ function DoomFire() {
   return (
     <canvas
       ref={canvas}
-      className="w-full absolute bottom-0 left-0 z-[-1] rounded-lg"
       width={1000}
       height={300}
       style={{
         backgroundColor: "rgba(0, 0, 0, 0)",
       }}
+      {...props}
     />
   );
 }

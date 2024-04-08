@@ -10,6 +10,7 @@ import {
 import DoomFire from "./components/DoomFire";
 import React from "react";
 import Prize from "./components/Prize";
+import Mirror from "./components/Mirror";
 
 interface Link {
   icon?: IconType;
@@ -102,7 +103,17 @@ function App() {
     <>
       <div className="flex h-screen justify-center items-center text-white bg-zinc-950 p-4">
         <div className="lg:min-w-[750px] flex flex-col items-center justify-center rounded-xl border-solid border border-zinc-800 p-8 backdrop-blur-sm relative">
-          <DoomFire />
+          <DoomFire
+            className="w-full absolute bottom-0 left-0 z-[-1] rounded-lg"
+            id="doom-fire"
+          />
+          <Mirror
+            className="w-full absolute top-0 left-0 z-[-1] rounded-lg"
+            style={{
+              transform: "rotate(180deg)",
+            }}
+          />
+
           {expert && <Prize />}
           <div className="text-6xl emoji select-none  flex items-center justify-center">
             ☣️
