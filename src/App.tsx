@@ -54,7 +54,7 @@ function App() {
     {
       icon: FaLink,
       name: "My links",
-      url: "http://localhost:5173?r=1",
+      url: `${window.location.href}?r=1`,
     },
   ]);
 
@@ -68,7 +68,7 @@ function App() {
       const r = parseInt(window.location.search.replace("?r=", ""));
 
       if (r >= 8) {
-        return window.location.replace("http://localhost:5173");
+        return window.location.replace(window.location.href.split("?")[0]);
       }
 
       for (let i = 0; i < r; i++) {
