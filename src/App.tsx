@@ -116,13 +116,13 @@ function App() {
 
           {expert && <Prize />}
           <div className="text-6xl emoji select-none  flex items-center justify-center">
-            ☣️
+            👁️
           </div>
           <h1 className="text-4xl font-bold text-center mt-2">
             rxonvrdo<span className="select-none">'s links</span>
           </h1>
           <p className="text-md font-thin text-center select-none">
-            against all legal positivism
+            
           </p>
           <div className="flex flex-col mt-2 mb-5 w-full p-4 items-center justify-center">
             {links.map((link, key) => (
