@@ -11,6 +11,9 @@ import DoomFire from "./components/DoomFire";
 import React from "react";
 import Prize from "./components/Prize";
 import Mirror from "./components/Mirror";
+import { getViews, postViews } from "./services/views/endpoints";
+import { getOrigin } from "./utils/origin";
+import { IoEyeOutline } from "react-icons/io5";
 
 interface Link {
   icon?: IconType;
@@ -21,6 +24,7 @@ interface Link {
 
 function App() {
   const [expert, setExpert] = React.useState<boolean>(false);
+  const [views, setViews] = React.useState<number | undefined>();
   const [links, setLinks] = React.useState<Link[]>([
     {
       icon: FaXTwitter,
@@ -58,6 +62,16 @@ function App() {
       url: `${window.location.href}?r=1`,
     },
   ]);
+
+  React.useEffect(() => {
+    getViews().then((response) => {
+      setViews(response.views);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    postViews({ origin: getOrigin(window.location.search) });
+  }, []);
 
   React.useEffect(() => {
     if (window.location.search.includes("?expert=true")) {
@@ -115,15 +129,16 @@ function App() {
           />
 
           {expert && <Prize />}
+          <div className="flex justify-center items-center gap-2 absolute top-0 right-0 p-4 select-none">
+            <IoEyeOutline className="text-xl" /> <small>{views}</small>
+          </div>
           <div className="text-6xl emoji select-none  flex items-center justify-center">
             👁️
           </div>
           <h1 className="text-4xl font-bold text-center mt-2">
             rxonvrdo<span className="select-none">'s links</span>
           </h1>
-          <p className="text-md font-thin text-center select-none">
-            
-          </p>
+          <p className="text-md font-thin text-center select-none"></p>
           <div className="flex flex-col mt-2 mb-5 w-full p-4 items-center justify-center">
             {links.map((link, key) => (
               <a
