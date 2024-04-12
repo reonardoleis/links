@@ -65,7 +65,6 @@ function App() {
 
   React.useEffect(() => {
     (async () => {
-      await new Promise((resolve) => setTimeout(resolve, 10000));
       const views = await getViews();
       setViews(views.views);
       await postViews({ origin: getOrigin(window.location.search) });
@@ -114,20 +113,22 @@ function App() {
       <div className="flex h-screen justify-center items-center text-white bg-zinc-950 p-4">
         <div className="lg:min-w-[750px] flex flex-col items-center justify-center rounded-md border-solid border border-zinc-900 p-8 backdrop-blur-sm relative">
           <DoomFire
-            className="w-full absolute bottom-0 left-0 z-[-1] rounded-md"
+            className="w-full absolute bottom-0 left-0 z-[-1] rounded-md fire-anim"
             id="doom-fire"
           />
           <Mirror
-            className="w-full absolute top-0 left-0 z-[-1] rounded-md"
+            className="w-full absolute top-0 left-0 z-[-1] rounded-md fire-anim"
             style={{
               transform: "rotate(180deg)",
             }}
           />
 
           {expert && <Prize />}
-          <div className="flex justify-center items-center gap-2 absolute top-0 right-0 p-4 select-none">
-            <IoEyeOutline className="text-xl" /> <small>{views}</small>
-          </div>
+          {views && (
+            <div className="flex justify-center items-center gap-2 absolute top-0 right-0 p-4 select-none">
+              <IoEyeOutline className="text-xl" /> <small>{views}</small>
+            </div>
+          )}
           <div className="text-6xl emoji select-none  flex items-center justify-center">
             👁️
           </div>

@@ -31,3 +31,20 @@ body {
 .emoji {
   animation: ninja-animation 4s infinite;
 }
+
+@keyframes fire-animation {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+
+.fire-anim { 
+  animation: fire-animation 10s linear infinite;
+}
