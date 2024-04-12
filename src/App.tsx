@@ -65,6 +65,7 @@ function App() {
 
   React.useEffect(() => {
     (async () => {
+      await new Promise((resolve) => setTimeout(resolve, 10000));
       const views = await getViews();
       setViews(views.views);
       await postViews({ origin: getOrigin(window.location.search) });
