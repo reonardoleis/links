@@ -1,5 +1,4 @@
 const translateReferrer = (referrer: string): string => {
-  console.log("Came from", referrer);
   if (referrer.includes("t.co")) {
     return "https://x.com";
   }
