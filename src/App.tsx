@@ -64,53 +64,48 @@ function App() {
   ]);
 
   React.useEffect(() => {
-    getViews().then((response) => {
-      setViews(response.views);
-    });
-  }, []);
-
-  React.useEffect(() => {
-    postViews({ origin: getOrigin(window.location.search) });
-  }, []);
-
-  React.useEffect(() => {
-    if (window.location.search.includes("?expert=true")) {
-      setExpert(true);
-      return;
-    }
-
-    if (window.location.search.includes("?r=")) {
-      const r = parseInt(window.location.search.replace("?r=", ""));
-
-      if (r >= 8) {
-        return window.location.replace(window.location.href.split("?")[0]);
+    (async () => {
+      const views = await getViews();
+      setViews(views.views);
+      await postViews({ origin: getOrigin(window.location.search) });
+      if (window.location.search.includes("?expert=true")) {
+        setExpert(true);
+        return;
       }
 
-      for (let i = 0; i < r; i++) {
-        setLinks((prev) => {
-          const base = window.location.href.split("?")[0];
+      if (window.location.search.includes("?r=")) {
+        const r = parseInt(window.location.search.replace("?r=", ""));
 
-          if (r == 7) {
-            setExpert(true);
-            var newUrl = `${base}?expert=true`;
-          } else {
-            var newUrl = `${base}?r=${r + 1}`;
-          }
+        if (r >= 8) {
+          return window.location.replace(window.location.href.split("?")[0]);
+        }
 
-          const myLinks = prev.find((link) => link.name === "My links")!;
-          myLinks.url = newUrl;
+        for (let i = 0; i < r; i++) {
+          setLinks((prev) => {
+            const base = window.location.href.split("?")[0];
 
-          return [
-            ...prev,
-            {
-              icon: FaLink,
-              name: `My links (${i + 1})`,
-              url: newUrl,
-            },
-          ];
-        });
+            if (r == 7) {
+              setExpert(true);
+              var newUrl = `${base}?expert=true`;
+            } else {
+              var newUrl = `${base}?r=${r + 1}`;
+            }
+
+            const myLinks = prev.find((link) => link.name === "My links")!;
+            myLinks.url = newUrl;
+
+            return [
+              ...prev,
+              {
+                icon: FaLink,
+                name: `My links (${i + 1})`,
+                url: newUrl,
+              },
+            ];
+          });
+        }
       }
-    }
+    })();
   }, []);
 
   return (

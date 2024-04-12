@@ -83,26 +83,31 @@ function DoomFire(props: DoomFireProps) {
   }
 
   function draw() {
-    for (let i = 0; i < firePixelArray.length; i++) {
-      let colorIndex = firePixelArray[i].fireIntensity;
+    // calculate an array of indexes
+    // filtering the ones that are below the FIRE_SIZE_MOD
+
+    const indexes = firePixelArray
+      .map((firePixel, index) => {
+        if (firePixel.fireIntensity >= FIRE_SIZE_MOD) {
+          return index;
+        }
+      })
+      .filter((index) => index !== undefined);
+
+    for (let i = 0; i < indexes.length; i++) {
+      const idx = indexes[i];
+      let colorIndex = firePixelArray[idx].fireIntensity;
       let r = fireColorsPalette[colorIndex].r;
       let g = fireColorsPalette[colorIndex].g;
       let b = fireColorsPalette[colorIndex].b;
-
-      if (colorIndex < FIRE_SIZE_MOD) {
-        r = 0;
-        g = 0;
-        b = 0;
-        continue;
-      }
 
       const ctx = canvas.current?.getContext("2d");
       if (!ctx) return;
 
       ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
       ctx.fillRect(
-        firePixelArray[i].pixelX,
-        firePixelArray[i].pixelY - PIXEL_SIZE,
+        firePixelArray[idx].pixelX,
+        firePixelArray[idx].pixelY - PIXEL_SIZE,
         PIXEL_SIZE,
         PIXEL_SIZE
       );
