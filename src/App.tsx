@@ -49,12 +49,6 @@ function App() {
       url: "https://last.fm/user/reonardo",
     },
     {
-      icon: FaGithub,
-      name: "GitHub",
-      detailedName: "reonardoleis",
-      url: "https://github.com/reonardoleis",
-    },
-    {
       icon: FaLink,
       name: "My links",
       url: `${window.location.href}?r=1`,
