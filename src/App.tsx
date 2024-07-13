@@ -2,7 +2,6 @@ import { IconType } from "react-icons";
 import {
   FaXTwitter,
   FaInstagram,
-  FaGithub,
   FaSteam,
   FaLastfm,
   FaLink,
@@ -123,10 +122,10 @@ function App() {
               <a
                 key={key}
                 href={link.url}
-                className="text-md lg:text-xl md:text-lg font-thin w-full mt-2 rounded-xl select-none"
+                className="text-md lg:text-xl md:text-lg font-mono w-full mt-2 rounded-xl select-none"
                 target={!link.name.includes("My links") ? "_blank" : "_self"}
               >
-                <button className="flex justify-center items-center w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
+                <button className="text-white flex justify-center items-center w-full outline outline-zinc-700 p-2 outline-[1px] rounded-md hover:bg-white hover:text-black transition-all">
                   {link.icon && <link.icon className="inline mr-2" />}
                   {link.name} {link.detailedName && `(${link.detailedName})`}
                 </button>
